@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, BarChart3, FileSpreadsheet, Database } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
             Portfolio
           </Link>
 
-          <div className="flex gap-6">
+          <div className="flex items-center gap-6">
             <Link
               href="/projects"
               className="text-sm transition hover:text-primary"
@@ -44,6 +45,8 @@ export default function Home() {
             >
               Admin
             </Link>
+
+            <ThemeToggle />
           </div>
         </div>
       </nav>
