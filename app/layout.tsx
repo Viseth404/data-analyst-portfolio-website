@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Header } from '@/components/ui/header'
+import { Footer } from '@/components/ui/footer'
 import './globals.css'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
@@ -10,9 +12,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
+  title: 'Keo Viseth | Data Analyst Portfolio',
+  description:
+    'Financial analyst and data analyst portfolio showcasing projects in financial reporting, Excel, SQL, and data analysis.',
   icons: {
     icon: [
       {
@@ -47,8 +49,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans antialiased">
-        {children}
+      <body className="flex min-h-screen flex-col font-sans antialiased">
+        <Header />
+        <div className="flex-1">{children}</div>
+        <Footer />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

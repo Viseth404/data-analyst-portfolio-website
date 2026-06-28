@@ -37,113 +37,86 @@ export default function ProjectsPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <nav className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
-          <Link href="/" className="text-xl font-bold text-primary">
-            Portfolio
-          </Link>
+    <div className="mx-auto w-full max-w-4xl px-4 py-12">
+      <div className="mb-8 flex items-center gap-3">
+        <Link
+          href="/"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:bg-secondary"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Link>
 
-          <div className="flex gap-6">
-            <Link href="/projects" className="text-sm font-bold text-foreground">
-              Projects
-            </Link>
-            <Link href="/skills" className="text-sm transition hover:text-primary">
-              Skills
-            </Link>
-            <Link href="/about" className="text-sm transition hover:text-primary">
-              About
-            </Link>
-            <Link href="/contact" className="text-sm transition hover:text-primary">
-              Contact
-            </Link>
-          </div>
+        <h1 className="text-3xl font-bold text-foreground">Projects</h1>
+      </div>
+
+      {error && (
+        <div className="mb-6 rounded-lg border border-red-500 bg-red-500/10 p-4 text-sm font-medium text-red-500">
+          {error}
         </div>
-      </nav>
+      )}
 
-      <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-12">
-        <div className="mb-8 flex items-center gap-3">
-          <Link
-            href="/"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-foreground transition hover:bg-secondary"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-
-          <h1 className="text-3xl font-bold text-foreground">Projects</h1>
+      {loading ? (
+        <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
+          Loading projects...
         </div>
+      ) : projects.length === 0 ? (
+        <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
+          No projects published yet.
+        </div>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <Link
+              key={project.id}
+              href={`/projects/${project.slug}`}
+              className="group overflow-hidden rounded-lg border border-border bg-card transition hover:-translate-y-1 hover:shadow-md"
+            >
+              {project.cover_image ? (
+                <div className="h-40 overflow-hidden bg-secondary">
+                  <img
+                    src={project.cover_image}
+                    alt={project.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                  />
+                </div>
+              ) : (
+                <div className="flex h-40 items-center justify-center bg-secondary">
+                  <span className="text-sm text-muted-foreground">No image</span>
+                </div>
+              )}
 
-        {error && (
-          <div className="mb-6 rounded-lg border border-red-500 bg-red-500/10 p-4 text-sm font-medium text-red-500">
-            {error}
-          </div>
-        )}
-
-        {loading ? (
-          <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
-            Loading projects...
-          </div>
-        ) : projects.length === 0 ? (
-          <div className="rounded-lg border border-border bg-card p-8 text-center text-muted-foreground">
-            No projects published yet.
-          </div>
-        ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
-              <Link
-                key={project.id}
-                href={`/projects/${project.slug}`}
-                className="group overflow-hidden rounded-lg border border-border bg-card transition hover:bg-secondary"
-              >
-                {project.cover_image && (
-                  <div className="h-40 overflow-hidden bg-secondary">
-                    <img
-                      src={project.cover_image}
-                      alt={project.title}
-                      className="h-full w-full object-cover transition group-hover:scale-105"
-                    />
+              <div className="p-4">
+                {project.category && (
+                  <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {project.category}
                   </div>
                 )}
 
-                <div className="p-4">
-                  {project.category && (
-                    <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      {project.category}
-                    </div>
-                  )}
+                <h3 className="mb-2 font-bold text-foreground group-hover:text-primary">
+                  {project.title}
+                </h3>
 
-                  <h3 className="mb-2 font-bold text-foreground">
-                    {project.title}
-                  </h3>
+                <p className="mb-3 text-sm leading-6 text-muted-foreground">
+                  {project.description}
+                </p>
 
-                  <p className="mb-3 text-sm leading-6 text-muted-foreground">
-                    {project.description}
-                  </p>
-
-                  {project.tags && project.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-border bg-background px-2 py-1 text-xs text-foreground"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </main>
-
-      <footer className="mt-12 border-t border-border bg-card">
-        <div className="mx-auto max-w-4xl px-4 py-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2026 Keo Viseth. All rights reserved.</p>
+                {project.tags && project.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border bg-background px-2 py-1 text-xs text-foreground"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
-      </footer>
+      )}
     </div>
   )
 }
