@@ -31,7 +31,7 @@ const skillCategories = [
   },
   {
     name: 'Programming & Development',
-    skills: ['Python', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Node.js'],
+    skills: ['Python', 'TypeScript', 'React', 'Next.js'],
     level: 80,
   },
   {
@@ -44,14 +44,11 @@ const skillCategories = [
       'Google Workspace',
       'Notion',
       'Trello',
-      'Git',
       'GitHub',
-      'Docker',
       'Supabase',
       'VS Code',
       'Tableau',
       'Vercel',
-      'railway',
     ],
     level: 90,
   },
