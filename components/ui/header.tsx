@@ -11,7 +11,7 @@ const navLinks = [
   { href: '/skills', label: 'Skills' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
-  { href: '/admin/login', label: 'Admin' },
+  // { href: '/admin/login', label: 'Admin' },
 ]
 
 export function Header() {
