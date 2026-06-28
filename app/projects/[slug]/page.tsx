@@ -71,7 +71,7 @@ export default function ProjectDetailPage() {
       <nav className="border-b border-border bg-card">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
           <Link href="/" className="text-xl font-bold text-primary">
-            DataAnalyst
+            Portfolio
           </Link>
 
           <div className="flex gap-6">
